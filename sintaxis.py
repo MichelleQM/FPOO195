@@ -58,6 +58,7 @@ var4= float( input("Introduce numeros decimales"))
 print(var1, var2, var3, var4)
 
 #5. Boolenas, Operadores de comparacion y logica 
+#Operadores logicos
 print(10 > 9) #mayor que 
 print(10 == 9) #iguala un valor 
 print(10 < 9) #menor que 
@@ -65,9 +66,9 @@ print(10 >= 9) #mayor igual que
 print(10 != 9)#diferente de
 print(10 <= 9) #menor igual que 
 
-
 X= 1
 
+#Operaciones binarias 
 print(x < 5 and x < 10) #true 
 print(x < 5 or x < 10) #false 
 print(not(x < 5 and x < 10)) #comparacion de las opraciones
