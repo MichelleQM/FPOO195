@@ -1,6 +1,6 @@
-a= input("Introduce cualquier numero")
+x= int(input("Introduce cualquier numero"))
 
 suma= 0
-for i in range(1, a+1):
-    suma+=i
-    print("El resultado de la suma de 1 a", a,"es: ", suma)
+for i in range(1, x+1):
+    suma= suma+i
+    print(suma)
