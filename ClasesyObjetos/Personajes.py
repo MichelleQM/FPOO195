@@ -1,4 +1,4 @@
-class Personaje:
+class Personajes:
     
     #atributo de personaje
     especie = "Humano"
@@ -9,21 +9,11 @@ class Personaje:
     #Metodos del personaje 
     def correr(self, estado):
         if(estado):
-            print("El personaje"+ self.nombre +"esta corriendo")
+            print("El personaje"+ self.nombre + "esta corriendo")
         else:
-            print("el personaje"+ self.nombre +"no esta corriendo")
+            print("el personaje"+ self.nombre + "no esta corriendo")
             
             
     def lazarGranada(self):
-        print(self.nombre+"Pego una granada")
+        print(self.nombre+" Pego una granada")
         
-    def recargarArma(self, municion):
-        cargador = 25
-        cargador = cargador + municion
-        print("Arma recargada al "+ str(cargador)+ "%")
-        
-#creamos las instancias para las acciones de cada personaje 
-spartan = Personaje()
-print(spartan.nombre)
-print(spartan.especie) 
-print(spartan.altura)
