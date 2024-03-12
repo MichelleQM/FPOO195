@@ -117,3 +117,4 @@ if __name__ == "_main_":
     root = tk.Tk()
     app = FraccionApp(root)
     root.mainloop()
+    
