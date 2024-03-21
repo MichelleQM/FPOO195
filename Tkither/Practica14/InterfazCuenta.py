@@ -18,7 +18,7 @@ def consultar_saldo():
 
 #Para deposito 
 def ingresar_efectivo():
-    numero_cuenta = entry_cuenta.get()
+    numero_cuenta = entry_cuenta.get()  
     cuenta = buscar_cuenta(numero_cuenta)
     if cuenta:
         monto = float(entry_monto.get())
