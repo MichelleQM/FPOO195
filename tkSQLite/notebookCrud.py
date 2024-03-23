@@ -1,12 +1,22 @@
 from tkinter import *
 from tkinter import ttk
 import tkinter as tk 
+from Controlador import *
 
+#7. Se crea un objeto de la clase controlador para acceder a todos los metodos y atributos de la misma 
+objControlador=Controlador()
+
+#8. Funcion para los inserts en donde se instancia las funciones de la clase controlador
+#desde esta funcion se mandan llamar los datos con un get con los que se declararon los inputs 
+def ejecutaInsert():
+    objControlador.insertUsuario(var1.get(),var2.get(),var3.get())
+
+#1. Definimos ventana y sus dimenciones 
 ventana = Tk()
 ventana.title("CRUD Usuarios")
 ventana.geometry("500x300")
 
-#2. 
+#2. se crea un panel para la ventana 
 panel=ttk.Notebook(ventana)
 panel.pack(fill='both', expand='yes')
 
@@ -41,5 +51,7 @@ var3=tk.StringVar()
 Label(pestana1,text='Contraseña: ').pack()
 Entry(pestana1,textvariable=var3).pack()
 
+boton= Button(pestana1,text='Registrar',command=ejecutaInsert)
+boton.pack()
 
 ventana.mainloop()
