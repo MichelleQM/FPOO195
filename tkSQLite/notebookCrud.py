@@ -11,6 +11,11 @@ objControlador=Controlador()
 def ejecutaInsert():
     objControlador.insertUsuario(var1.get(),var2.get(),var3.get())
 
+#9. se crea una funcion para el boton de busqueda de usuario, y este mismo se declara en una variable de nombre usuarioBD
+def buscarUsuario():
+    usuarioBD=objControlador.buscarUsuario(varBus.get())
+    print(usuarioBD)
+
 #1. Definimos ventana y sus dimenciones 
 ventana = Tk()
 ventana.title("CRUD Usuarios")
@@ -53,5 +58,19 @@ Entry(pestana1,textvariable=var3).pack()
 
 boton= Button(pestana1,text='Registrar',command=ejecutaInsert)
 boton.pack()
+
+#6. Pestana 2: Buscar usuario 
+Label(pestana2, text='Buscar Usuario',fg='blue', font=('modern',18)).pack()
+
+varBus=tk.StringVar()
+Label(pestana2,text='ID: ').pack()
+Entry(pestana2,textvariable=varBus).pack()
+
+boton= Button(pestana2,text='Buscar', command=buscarUsuario)
+boton.pack()
+
+Label(pestana2, text='Usuario Registrado',fg='black', font=('modern',14)).pack()
+tk.Text(pestana2, height=5, width=52).pack()
+
 
 ventana.mainloop()
