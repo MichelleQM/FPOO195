@@ -37,7 +37,7 @@ class Controlador:
             messagebox.showinfo("Exito","Eso tilin!!!")
             
             
-    #
+    #Metodo para la busqueda de un usuario en BD mediante su ID
     def buscarUsuario(self,id):
         conex=self.conexion()
         

@@ -12,9 +12,18 @@ def ejecutaInsert():
     objControlador.insertUsuario(var1.get(),var2.get(),var3.get())
 
 #9. se crea una funcion para el boton de busqueda de usuario, y este mismo se declara en una variable de nombre usuarioBD
+#dentro de la funcion para el boton se coloca una validacion la cual indica la infomacion del usuario que se esta buscando en la BD
+#Se crea un nueva variable la cual se dara a conocer al widget de text para que la informacion se pueda mostrar ahi, 
+#Se usa la funcion de insert la cual se incorpora directo al widget
 def buscarUsuario():
-    usuarioBD=objControlador.buscarUsuario(varBus.get())
-    print(usuarioBD)
+    usuarioBD = objControlador.buscarUsuario(varBus.get())
+    if txtBuscarUsuario:  
+        txtBuscarUsuario.delete('1.0', END)  
+        if usuarioBD:
+            for usuario in usuarioBD:
+                txtBuscarUsuario.insert(END, f"ID: {usuario[0]}, Nombre: {usuario[1]}, Correo: {usuario[2]}\n")
+        else:
+            txtBuscarUsuario.insert(END, "Usuario no encontrado en Base de datos")
 
 #1. Definimos ventana y sus dimenciones 
 ventana = Tk()
@@ -70,7 +79,7 @@ boton= Button(pestana2,text='Buscar', command=buscarUsuario)
 boton.pack()
 
 Label(pestana2, text='Usuario Registrado',fg='black', font=('modern',14)).pack()
-tk.Text(pestana2, height=5, width=52).pack()
-
+txtBuscarUsuario=tk.Text(pestana2, height=5, width=52)
+txtBuscarUsuario.pack()
 
 ventana.mainloop()
