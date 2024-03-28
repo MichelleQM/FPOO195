@@ -54,3 +54,16 @@ class Controlador:
                 return usuario
             except sqlite3.OperationalError:
                 print('No se pudo ejecutar la busqueda')
+                
+#Metodo para consulta de todos los registros en BD 
+    def listaUsuariosBD(self):
+        conex = self.conexion()
+        try:
+            cursor = conex.cursor()
+            sqlSelect = "select * from tbUsuarios"
+            cursor.execute(sqlSelect)
+            usuarios = cursor.fetchall()
+            conex.close()
+            return usuarios
+        except sqlite3.OperationalError:
+            print('Existe un error en la consulta')

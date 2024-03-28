@@ -24,6 +24,18 @@ def buscarUsuario():
                 txtBuscarUsuario.insert(END, f"ID: {usuario[0]}, Nombre: {usuario[1]}, Correo: {usuario[2]}\n")
         else:
             txtBuscarUsuario.insert(END, "Usuario no encontrado en Base de datos")
+            
+#10. Funcion para boton que despliega todos los registros en Base de datos
+#El caso fue casi el mismo que para la funcion de busqueda. 
+def mostrarRegistros():
+    usuariosBD = objControlador.listaUsuariosBD()
+    if txtListaUsuarios:
+        txtListaUsuarios.delete('1.0', END)
+        if usuariosBD:
+            for usuario in usuariosBD:
+                txtListaUsuarios.insert(END, f"ID: {usuario[0]}, Nombre: {usuario[1]}, Correo: {usuario[2]}\n")
+        else:
+            txtListaUsuarios.insert(END, "Aun no existen reistros en la Base de datos")
 
 #1. Definimos ventana y sus dimenciones 
 ventana = Tk()
@@ -68,7 +80,7 @@ Entry(pestana1,textvariable=var3).pack()
 boton= Button(pestana1,text='Registrar',command=ejecutaInsert)
 boton.pack()
 
-#6. Pestana 2: Buscar usuario 
+#7. Pestana 2: Buscar usuario 
 Label(pestana2, text='Buscar Usuario',fg='blue', font=('modern',18)).pack()
 
 varBus=tk.StringVar()
@@ -81,5 +93,13 @@ boton.pack()
 Label(pestana2, text='Usuario Registrado',fg='black', font=('modern',14)).pack()
 txtBuscarUsuario=tk.Text(pestana2, height=5, width=52)
 txtBuscarUsuario.pack()
+
+#8. Pestana 3: Listado de usuarios 
+Label(pestana3, text='Listado de usuarios', fg='blue', font=('modern', 18)).pack()
+boton = Button(pestana3, text='Mostrar usuarios BD', command=mostrarRegistros)
+boton.pack()
+Label(pestana3, text='Usuarios registrados en Base de Datos', fg='black', font=('modern', 14)).pack()
+txtListaUsuarios = tk.Text(pestana3, height=5, width=52)
+txtListaUsuarios.pack()
 
 ventana.mainloop()
