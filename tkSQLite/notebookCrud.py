@@ -2,9 +2,13 @@ from tkinter import *
 from tkinter import ttk
 import tkinter as tk 
 from Controlador import *
+from GeneradorPDF import *
+import os
+
 
 #7. Se crea un objeto de la clase controlador para acceder a todos los metodos y atributos de la misma 
 objControlador=Controlador()
+objPDF=GeneradorPDF()
 
 #8. Funcion para los inserts en donde se instancia las funciones de la clase controlador
 #desde esta funcion se mandan llamar los datos con un get con los que se declararon los inputs 
@@ -33,14 +37,25 @@ def mostrarRegistros():
         txtListaUsuarios.delete('1.0', END)
         if usuariosBD:
             for usuario in usuariosBD:
-                txtListaUsuarios.insert(END, f"ID: {usuario[0]}, Nombre: {usuario[1]}, Correo: {usuario[2]}\n")
+                txtListaUsuarios.insert(END, f"ID: {usuario[0]}, Nombre: {usuario[1]}, Correo: {usuario[2]}, Password:{usuario[3]}\n")
         else:
             txtListaUsuarios.insert(END, "Aun no existen reistros en la Base de datos")
+            
+def ejecutapdf():
+    if varPDF==" ":
+        messagebox.showwarning("Importante","Escribe un nombre")
+    else:
+        objPDF.add_page()
+        objPDF.chapter_body()
+        objPDF.output(varPDF.get()+".pdf")
+        rutaPDF="C:/Users/DEll Gamer G3/Desktop/FPOO195/tkSQLite"+varPDF.get()+".pdf"
+        messagebox.showinfo("Archivo Creado","PDF disponible en carpeta")
+        os.system(f"start {rutaPDF}")
 
 #1. Definimos ventana y sus dimenciones 
 ventana = Tk()
 ventana.title("CRUD Usuarios")
-ventana.geometry("500x300")
+ventana.geometry("600x400")
 
 #2. se crea un panel para la ventana 
 panel=ttk.Notebook(ventana)
@@ -52,6 +67,7 @@ pestana2=ttk.Frame(ventana)
 pestana3=ttk.Frame(ventana)
 pestana4=ttk.Frame(ventana)
 pestana5=ttk.Frame(ventana)
+pestana6=ttk.Frame(ventana)
 
 #4. Agregamos las pestanas 
 panel.add(pestana1, text='Crear Usuario')
@@ -59,7 +75,7 @@ panel.add(pestana2, text='Buscar usuario')
 panel.add(pestana3, text='Consultar usuarios')
 panel.add(pestana4, text='Editar usuario')
 panel.add(pestana5, text='Eliminar usuario')
-
+panel.add(pestana6, text='Reportes en PDF')
 
 #5. Pestana 1: formulario de insert 
 Label(pestana1, text='Registro de Usuarios',fg='blue', font=('modern',18)).pack()
@@ -101,5 +117,32 @@ boton.pack()
 Label(pestana3, text='Usuarios registrados en Base de Datos', fg='black', font=('modern', 14)).pack()
 txtListaUsuarios = tk.Text(pestana3, height=5, width=52)
 txtListaUsuarios.pack()
+
+#9. Pestana 4: Editar usuarios 
+Label(pestana4, text='Listado de usuarios', fg='blue', font=('modern', 18)).pack()
+boton = Button(pestana4, text='Mostrar usuarios BD', command=mostrarRegistros)
+boton.pack()
+Label(pestana4, text='Usuarios registrados en Base de Datos', fg='black', font=('modern', 14)).pack()
+txtListaUsuarios = tk.Text(pestana3, height=5, width=52)
+txtListaUsuarios.pack()
+
+#10. Pestana 5: Eliminar Usuario 
+Label(pestana5, text='Listado de usuarios', fg='blue', font=('modern', 18)).pack()
+boton = Button(pestana5, text='Mostrar usuarios BD', command=mostrarRegistros)
+boton.pack()
+Label(pestana5, text='Usuarios registrados en Base de Datos', fg='black', font=('modern', 14)).pack()
+txtListaUsuarios = tk.Text(pestana5, height=5, width=52)
+txtListaUsuarios.pack()
+
+#11. Pestana 6: Reportes PDF  
+Label(pestana6, text='Reportes PDF usuarios', fg='blue', font=('modern', 18)).pack()
+
+varPDF=tk.StringVar()
+Label(pestana6,text='Escribe el titulo de tu archivo: ').pack()
+Entry(pestana6,textvariable=varPDF).pack()
+
+boton = Button(pestana6, text='Crear PDF', command=ejecutapdf)
+boton.pack()
+
 
 ventana.mainloop()
