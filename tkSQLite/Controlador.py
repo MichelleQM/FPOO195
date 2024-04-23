@@ -67,3 +67,16 @@ class Controlador:
             return usuarios
         except sqlite3.OperationalError:
             print('Existe un error en la consulta')
+            
+    # Método para eliminar un usuario de la base de datos por su ID
+    def eliminarUsuario(self, id):
+        conex = self.conexion()
+        try:
+            cursor = conex.cursor()
+            sqlDelete = "DELETE FROM tbUsuarios WHERE id = ?"
+            cursor.execute(sqlDelete, (id,))
+            conex.commit()
+            conex.close()
+            messagebox.showinfo("Éxito", "Usuario eliminado correctamente")
+        except sqlite3.OperationalError:
+            print('No se pudo ejecutar la eliminación del usuario')

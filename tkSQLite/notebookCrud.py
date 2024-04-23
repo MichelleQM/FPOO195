@@ -51,6 +51,22 @@ def ejecutapdf():
         rutaPDF="C:/Users/DEll Gamer G3/Desktop/FPOO195/tkSQLite"+varPDF.get()+".pdf"
         messagebox.showinfo("Archivo Creado","PDF disponible en carpeta")
         os.system(f"start {rutaPDF}")
+        
+def buscarUsuarioEliminar():
+    usuarioBD = objControlador.buscarUsuario(varEli.get())
+    if txtElimnarUsuario:
+        txtElimnarUsuario.delete('1.0', END)
+        if usuarioBD:
+            for usuario in usuarioBD:
+                txtElimnarUsuario.insert(END, f"ID: {usuario[0]}, Nombre: {usuario[1]}, Correo: {usuario[2]}\n")
+        else:
+            txtElimnarUsuario.insert(END, "Usuario no encontrado en Base de datos")
+
+def eliminarUsuario():
+    objControlador.eliminarUsuario(varEli.get())
+    # Limpiar el área de texto después de eliminar el usuario
+    txtElimnarUsuario.delete('1.0', END)
+    # Opcionalmente, puedes mostrar un mensaje de éxito o realizar otras acciones después de eliminar el usuario
 
 #1. Definimos ventana y sus dimenciones 
 ventana = Tk()
@@ -120,19 +136,29 @@ txtListaUsuarios.pack()
 
 #9. Pestana 4: Editar usuarios 
 Label(pestana4, text='Listado de usuarios', fg='blue', font=('modern', 18)).pack()
-boton = Button(pestana4, text='Mostrar usuarios BD', command=mostrarRegistros)
+boton = Button(pestana4, text='Mostrar usuarios BD')
 boton.pack()
 Label(pestana4, text='Usuarios registrados en Base de Datos', fg='black', font=('modern', 14)).pack()
-txtListaUsuarios = tk.Text(pestana3, height=5, width=52)
-txtListaUsuarios.pack()
+txtListaUsuarios_editar = tk.Text(pestana4, height=5, width=52)
+txtListaUsuarios_editar.pack()
 
 #10. Pestana 5: Eliminar Usuario 
-Label(pestana5, text='Listado de usuarios', fg='blue', font=('modern', 18)).pack()
-boton = Button(pestana5, text='Mostrar usuarios BD', command=mostrarRegistros)
-boton.pack()
-Label(pestana5, text='Usuarios registrados en Base de Datos', fg='black', font=('modern', 14)).pack()
-txtListaUsuarios = tk.Text(pestana5, height=5, width=52)
-txtListaUsuarios.pack()
+Label(pestana5, text='Busca el usuario a eliminar',fg='blue', font=('modern',18)).pack()
+
+varEli=tk.StringVar()
+Label(pestana5,text='ID: ').pack()
+Entry(pestana5,textvariable=varEli).pack()  # Corregido el nombre de la variable
+
+botonBuscar = Button(pestana5, text='Buscar', command=buscarUsuarioEliminar)
+botonBuscar.pack()
+
+botonEliminar = Button(pestana5, text='Eliminar', command=eliminarUsuario)
+botonEliminar.pack()
+
+Label(pestana5, text='Usuario Registrado',fg='black', font=('modern',14)).pack()
+txtElimnarUsuario=tk.Text(pestana5, height=5, width=52)
+txtElimnarUsuario.pack()  
+
 
 #11. Pestana 6: Reportes PDF  
 Label(pestana6, text='Reportes PDF usuarios', fg='blue', font=('modern', 18)).pack()

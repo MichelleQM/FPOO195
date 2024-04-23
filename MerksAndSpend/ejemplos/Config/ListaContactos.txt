@@ -1,0 +1,3 @@
+nombre& mail& celular& direccion& prioridad
+Raul Quintero&jriquinteror@outlook.com&safsdaf&dfsfsd&1
+Lupita Frias&lupitafm@gmail.com&dsfdsfs&dsfsfs&2
